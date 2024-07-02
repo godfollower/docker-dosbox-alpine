@@ -26,7 +26,7 @@ COPY asound.conf /etc/asound.conf
 # copy built dosbox binary from build container
 COPY --from=dosbox-x-build /usr/bin/dosbox-x /usr/bin/dosbox-x
 
-# install runtime packages, add dosbox user, create /var/games/dosbox
+# install runtime packages, add dosbox-x user, create /var/games/dosbox-x
 RUN apk add --no-cache sdl libxxf86vm libstdc++ libgcc alsa-plugins-pulse && \
     adduser -D dosbox-x && \
     mkdir -p /var/games/dosbox-x && \
