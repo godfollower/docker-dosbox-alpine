@@ -54,4 +54,4 @@ COPY --from=dosbox-x-build /usr/bin/dosbox-x /usr/bin/dosbox-x
 COPY --chown=dosbox-x:dosbox-x dosbox-x.conf dosbox-x.conf
 
 # LAUNCH!!!
-#ENTRYPOINT ["dosbox-x", "-conf", "dosbox-x.conf"]
+ENTRYPOINT ["dosbox-x", "-conf", "dosbox-x.conf"]
