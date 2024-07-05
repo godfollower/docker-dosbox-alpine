@@ -3,7 +3,7 @@ FROM debian:latest AS dosbox-x-build
 
 # install buildtime and runtime bits into the Debian build container
 RUN apt-get update
-RUN apt-get install -y libsdl2-2.0-0 libsdl2-dev build-essential automake libncurses-dev nasm curl jq
+RUN apt-get install -y libsdl2-2.0-0 libsdl2-dev pulseaudio build-essential automake libncurses-dev nasm curl jq
 RUN apt-get clean
 
 # set the root's home directory as the working directory of the build (not / !!!)
