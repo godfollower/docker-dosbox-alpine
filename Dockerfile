@@ -30,8 +30,8 @@ RUN apt-get install -y libsdl2-2.0-0 libsdl2-net-2.0-0 libsdl-kitchensink1 fluid
 
 # add the runtime container's user and create the directory that will be mapped as drive A:
 RUN adduser dosbox-x
-RUN mkdir -p /var/games/dosbox-x
-RUN chown dosbox-x:dosbox-x /var/games/dosbox-x
+RUN mkdir -p /var/dos/dosbox-x
+RUN chown dosbox-x:dosbox-x /var/dos/dosbox-x
 
 # set the container's user
 USER dosbox-x

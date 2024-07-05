@@ -2,14 +2,14 @@
 
 ## Introduction
 
-This project is Dosbox-X in an Alpine Linux container, complete with sound support.
+This project is Dosbox-X in a Debian Linux container, complete with sound support.
 It was largely inspired by https://github.com/h6w/dosbox-docker and includes
 a handful of improvements over that project:
 
 - Multi-Stage Build (retain only what is necessary in final image)
-- Use Alpine 3 (rather than Edge)
+- Uses Debian 12 (Bookworm)
 - Use native alsa packages, instead of building them
-- Updated version of dosbox-x (which is obtained directly through GitHub)
+- Up to date version of dosbox-x (which is obtained directly through GitHub)
 - After build, run as non-root user
 - Provide canned dosbox-x.conf, to mount C and A drives (see below)
 
@@ -89,19 +89,10 @@ Since the A and C drives are already in use, you'll need to put elsewhere any
 image mounts (for floppy or CD-ROM images) you need. See documentation on
 [MOUNT](https://www.dosbox.com/wiki/MOUNT)
 
-DOSBox will automatically load a `~/.dosbox-x/dosbox-x-{version}.conf` file or
+DOSBox-X will automatically load a `~/.dosbox-x/dosbox-x-{version}.conf` file or
 a `./dosbox-x.conf` file if found. In an attempt to be future-proof about DOSBox-X
 version, this image uses `./dosbox-x.conf`, but explicitly loads it with the
 `-conf` parameter.
-
-It's [not well documented](https://www.dosbox.com/DOSBoxManual.html#ConfigFile),
-but DOSBox-X [supports](https://www.vogons.org/viewtopic.php?p=172469#p172469)
-multiple `-conf` directives, which is why this image explicitly loads
-`./dosbox-x.conf`. For regular settings, the one found in the last conf file
-wins, and autoexec directives are merged.
-This means that you should be able to construct a downstream image, `ADD`
-or `COPY` your own conf file, and use `CMD` to add additional `-conf filename`
-directives are required.
 
 *NOTE* Remember to chown (or chmod) the file so that the dosbox-x user can read it!
 
@@ -116,7 +107,7 @@ mygame.exe
 Example Dockerfile:
 
 ```dockerfile
-FROM godfollower/docker-dosbox-x-alpine
+FROM godfollower/docker-dosbox-x
 
 # fetch game zip
 ADD --chown=dosbox-x:dosbox-x https://oldgame.net/oldgame.zip oldgame.zip
@@ -130,4 +121,5 @@ CMD ["-conf", "dosbox-x_oldgame.conf"]
 
 ## Disclaimer
 
-This project is intended for educational purposes only.
+This project is targeted for hobbyists/vintage computing enthusiasts as a general use vintage pre 2000 x86 container (not just for vintage gaming like Dosbox is)
+
