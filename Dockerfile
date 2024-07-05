@@ -27,7 +27,7 @@ FROM debian:latest AS dosbox-x
 # install the runtime container's required packages
 RUN apt-get update
 RUN apt-get install -y libsdl2-2.0-0 libsdl2-net-2.0-0 libsdl-kitchensink1 fluidsynth libasound2 libavdevice59 libavcodec-extra libncurses6 libpcap0.8 libslirp0 libxkbfile1 libavdevice59 libavcodec-extra pulseaudio libasound2-plugins
-RUN apt-get install -y linux-headers-$(uname -r)
+RUN apt-get install -y linux-headers-amd64
 
 # add the runtime container's user and create the directory that will be mapped as drive A:
 RUN adduser dosbox-x
