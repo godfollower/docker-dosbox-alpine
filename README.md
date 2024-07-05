@@ -2,15 +2,16 @@
 
 ## Introduction
 
-This project is Dosbox-X in a Debian Linux container, complete with sound support.
-It was largely inspired by https://github.com/h6w/dosbox-docker and includes
-a handful of improvements over that project:
+This project is DOSBox-X in a Debian Linux container, complete with sound support.
+It was largely inspired by https://github.com/classic-containers/dosbox and includes
+suitable general computing changes, some coming with Dosbox-X and other usability tweaks:
 
-- Multi-Stage Build (retain only what is necessary in final image)
+- Multi-stage build (retain only necessary libraries in the runtime)
 - Uses Debian 12 (Bookworm)
+- Uses DOSBox-X in order to support general computing (unlike the gaming only focus of the DOSBox project)
 - Use native alsa packages, instead of building them
-- Up to date version of dosbox-x (which is obtained directly through GitHub)
-- After build, run as non-root user
+- Up to date version of DOSBox-X (which is obtained directly through GitHub)
+- During runtime user is non-root
 - Provide canned dosbox-x.conf, to mount C and A drives (see below)
 
 ## Running
@@ -59,13 +60,13 @@ After installing Docker for Windows,
 
 ## Saving Games
 
-At startup, DOSBox-X is configured to mount the A drive to /var/games/dosbox-x.
+At startup, DOSBox-X is configured to mount the A drive to /var/dos/dosbox-x.
 If you would like to retain game data between container runs, simply mount
-a local directory to /var/games/dosbox-x inside the container.
+a local directory to /var/dos/dosbox-x inside the container.
 
 ```shell
 $ docker run \
-    -v /home/user1/savedata:/var/games/dosbox-x \
+    -v /home/user1/savedata:/var/dos/dosbox-x \
     godfollower/docker-dosbox-x-alpine
 ```
 
@@ -83,7 +84,7 @@ when it sees a large drive or files on the A drive.
 
 This image comes with a canned dosbox-x.conf which is loaded via the ENTRYPOINT
 when the container runs; included in the file are autoexec commands to mount
-the C drive to /home/dosbox-x and the A drive to /var/games/dosbox-x (as above).
+the C drive to /home/dosbox-x and the A drive to /var/dos/dosbox-x (as above).
 
 Since the A and C drives are already in use, you'll need to put elsewhere any
 image mounts (for floppy or CD-ROM images) you need. See documentation on
@@ -101,7 +102,7 @@ Example dosbox-x conf:
 ```ini
 [autoexec]
 c:
-mygame.exe
+myapplication.exe
 ```
 
 Example Dockerfile:
@@ -110,16 +111,16 @@ Example Dockerfile:
 FROM godfollower/docker-dosbox-x
 
 # fetch game zip
-ADD --chown=dosbox-x:dosbox-x https://oldgame.net/oldgame.zip oldgame.zip
+ADD --chown=dosbox-x:dosbox-x https://oldapplications.net/oldapplication.zip oldapplication.zip
 
-RUN unzip mygame.zip
+RUN unzip myapplication.zip
 
-COPY --chown=dosbox-x:dosbox-x dosbox-x_oldgame.conf dosbox-x_oldgame.conf
+COPY --chown=dosbox-x:dosbox-x dosbox-x_oldapplication.conf dosbox-x_oldapplication.conf
 
-CMD ["-conf", "dosbox-x_oldgame.conf"]
+CMD ["-conf", "dosbox-x_oldapplicaiton.conf"]
 ```
 
 ## Disclaimer
 
-This project is targeted for hobbyists/vintage computing enthusiasts as a general use vintage pre 2000 x86 container (not just for vintage gaming like Dosbox is)
+This project is targeted for hobbyists/vintage computing enthusiasts as a general use vintage pre 2000 x86 container (not just for vintage gaming such as DOSBox is)
 
