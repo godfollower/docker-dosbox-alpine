@@ -58,10 +58,10 @@ After installing Docker for Windows,
        godfollower/docker-dosbox-x-alpine
     ```
 
-## Saving Games
+## Saving persistent user data
 
 At startup, DOSBox-X is configured to mount the A drive to /var/dos/dosbox-x.
-If you would like to retain game data between container runs, simply mount
+If you would like to retain persistent user data between container runs, simply mount
 a local directory to /var/dos/dosbox-x inside the container.
 
 ```shell
