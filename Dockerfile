@@ -30,12 +30,12 @@ COPY --from=dosbox-x-build /root/src/dosbox-x /usr/bin/dosbox-x
 
 
 # install runtime packages, add dosbox-x user, create /var/games/dosbox-x
-#RUN apk add --no-cache sdl2 libxxf86vm libstdc++ libgcc alsa-plugins-pulse
+RUN apk add --no-cache sdl2 libxxf86vm libstdc++ libgcc alsa-plugins-pulse
 RUN adduser -D dosbox-x
 RUN mkdir -p /var/games/dosbox-x
 RUN chown dosbox-x:dosbox-x /var/games/dosbox-x
 
-#USER dosbox-x
+USER dosbox-x
 WORKDIR /home/dosbox-x
 
 # copy default dosbox conf
