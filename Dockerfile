@@ -3,7 +3,7 @@ FROM debian:latest AS dosbox-x-build
 
 # install buildtime and runtime bits into the Debian build container
 RUN apt-get update
-RUN apt-get install -y libsdl2-2.0-0 libsdl2-dev libsdl2-net-dev libpcap-dev libslirp-dev libfluidsynth-dev libavdevice59 libavformat-dev libavcodec-dev libavcodec-extra libswscale-dev libfreetype-dev libxkbfile-dev libxrandr-dev build-essential automake libncurses-dev nasm curl jq
+RUN apt-get install -y libsdl2-2.0-0 libsdl2-dev libsdl2-net-dev libasound2-dev libpcap-dev libslirp-dev libfluidsynth-dev libavformat-dev libavcodec-dev libswscale-dev libfreetype-dev libxkbfile-dev libxrandr-dev build-essential automake libncurses-dev nasm curl jq
 
 # set the root's home directory as the working directory of the build (not / !!!)
 WORKDIR /root
@@ -26,7 +26,7 @@ FROM debian:latest AS dosbox-x
 
 # install the runtime container's required packages
 RUN apt-get update
-RUN apt-get install -y libsdl2-2.0-0 libsdl2-net-2.0-0 libsdl-kitchensink1 fluidsynth libavdevice59 libavcodec-extra libncurses6 libpcap0.8 libslirp0 libxkbfile1 pulseaudio
+RUN apt-get install -y libsdl2-2.0-0 libsdl2-net-2.0-0 libsdl-kitchensink1 fluidsynth libasound2 libavdevice59 libavcodec-extra libncurses6 libpcap0.8 libslirp0 libxkbfile1 libavdevice59 libavcodec-extra pulseaudio
 
 # add the runtime container's user and create the directory that will be mapped as drive A:
 RUN adduser dosbox-x
