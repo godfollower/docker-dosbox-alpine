@@ -18,7 +18,8 @@ ADD https://github.com/joncampbell123/dosbox-x/archive/refs/tags/dosbox-x-v2024.
 RUN tar -xzv --strip-components=1 -f dosbox-x.tar.gz
 
 # build the SDL2 version of the application using the tarball's script
-RUN ./build-sdl2
+RUN ./build-debug-sdl2
+RUN make install
 
 
 # define the runtime container
