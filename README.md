@@ -122,5 +122,5 @@ CMD ["-conf", "dosbox-x_oldapplicaiton.conf"]
 
 ## Disclaimer
 
-This project is targeted for hobbyists/vintage computing enthusiasts as a general use vintage pre 2000 x86 container (not just for vintage gaming such as DOSBox is)
+This project is targeted for the hobbyists/vintage computing enthusiasts as a general use vintage DOS-x86-Win3.x-9x/pre-2000 environment for use on modern technologies via being a container (and not just for vintage gaming such as DOSBox is)
 
