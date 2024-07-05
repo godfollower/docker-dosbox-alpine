@@ -29,7 +29,7 @@ $ docker run \
     -e DISPLAY=unix$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --device /dev/snd
-    godfollower/docker-dosbox-x-alpine
+    godfollower/dosbox-x-containerized
 ```
 
 ### Docker for Windows
@@ -77,7 +77,7 @@ runs of the container.
 I was originally going to use the D drive for the save mount, but I imagine
 some things out there expect the D drive to be a CD-ROM, and people probably
 more commonly used the floppy drive at A for transferring saves (and other
-random stuff) anyway. Hopefully your downstream game/whatever won't barf
+random stuff) anyway. Hopefully your downstream application/whatever won't barf
 when it sees a large drive or files on the A drive.
 
 ## Configuring DOSBox-X & Extending
@@ -110,7 +110,7 @@ Example Dockerfile:
 ```dockerfile
 FROM godfollower/docker-dosbox-x
 
-# fetch game zip
+# fetch application zip
 ADD --chown=dosbox-x:dosbox-x https://oldapplications.net/oldapplication.zip oldapplication.zip
 
 RUN unzip myapplication.zip
