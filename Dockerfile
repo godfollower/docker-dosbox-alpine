@@ -3,7 +3,7 @@ FROM debian:latest AS dosbox-x-build
 
 # install buildtime and runtime bits into the Debian build container
 RUN apt-get update
-RUN apt-get install -y libsdl2-2.0-0 libsdl2-dev libsdl2-net-dev libpcap-dev libslirp-dev fluidsynth libfluidsynth-dev libavdevice58 libavformat-dev libavcodec-dev libavcodec-extra libavcodec-extra58 libswscale-dev libfreetype-dev libxkbfile-dev libxrandr-dev pulseaudio build-essential automake libncurses-dev nasm curl jq
+RUN apt-get install -y libsdl2-2.0-0 libsdl2-dev libsdl2-net-dev libpcap-dev libslirp-dev fluidsynth libfluidsynth-dev libavdevice59 libavformat-dev libavcodec-dev libavcodec-extra libsdl-kitchensink1 libswscale-dev libfreetype-dev libxkbfile-dev libxrandr-dev pulseaudio build-essential automake libncurses-dev nasm curl jq
 RUN apt-get clean
 
 # set the root's home directory as the working directory of the build (not / !!!)
@@ -23,30 +23,30 @@ RUN make install
 
 
 # define the runtime container
-#FROM alpine:latest
+FROM alpine:latest
 
 # install the runtime container's required packages
-#RUN apk add --no-cache sdl2 libxxf86vm libstdc++ libgcc alsa-plugins-pulse
+RUN apk add --no-cache sdl2 libxxf86vm libstdc++ libgcc alsa-plugins-pulse
 
 # add the runtime container's user and create the directory that will be mapped as drive A:
-#RUN adduser -D dosbox-x
-#RUN mkdir -p /var/games/dosbox-x
-#RUN chown dosbox-x:dosbox-x /var/games/dosbox-x
+RUN adduser -D dosbox-x
+RUN mkdir -p /var/games/dosbox-x
+RUN chown dosbox-x:dosbox-x /var/games/dosbox-x
 
 # set the container's user
-#USER dosbox-x
+USER dosbox-x
 
 # set the working directory to the user's home directory which will also be mapped as drive c: wihtin the application
-#WORKDIR /home/dosbox-x
+WORKDIR /home/dosbox-x
 
 # copy the repro's ALSA config
-#COPY asound.conf /etc/asound.conf
+COPY asound.conf /etc/asound.conf
 
 # copy the just built dosbox-x binary from the build container
-#COPY --from=dosbox-x-build /root/src/dosbox-x /usr/bin/dosbox-x
+COPY --from=dosbox-x-build /usr/bin/dosbox-x /usr/bin/dosbox-x
 
 # copy the repro's preconfigured dosbox-x config
-#COPY --chown=dosbox-x:dosbox-x dosbox-x.conf dosbox-x.conf
+COPY --chown=dosbox-x:dosbox-x dosbox-x.conf dosbox-x.conf
 
 # LAUNCH!!!
 #ENTRYPOINT ["dosbox-x", "-conf", "dosbox-x.conf"]
