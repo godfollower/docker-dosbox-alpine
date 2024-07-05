@@ -1,4 +1,4 @@
-# Dosbox-X
+# Dosbox-X in a container
 
 ## Introduction
 
