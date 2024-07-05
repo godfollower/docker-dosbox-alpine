@@ -1,10 +1,10 @@
-# Dosbox-X in a container
+# DOSBox-X in a container
 
 ## Introduction
 
 This project is DOSBox-X in a Debian Linux container, complete with sound support.
 It was largely inspired by https://github.com/classic-containers/dosbox and includes
-suitable general computing changes, some coming with Dosbox-X and other usability tweaks:
+suitable general computing changes, some coming with DOSBox-X along with other usability tweaks:
 
 - Multi-stage build (retain only necessary libraries in the runtime)
 - Uses Debian 12 (Bookworm)
@@ -55,7 +55,7 @@ After installing Docker for Windows,
    $ docker run \
        -e DISPLAY=host.docker.internal:0 \
        -e PULSE_SERVER=host.docker.internal \
-       godfollower/docker-dosbox-x-alpine
+       godfollower/dosbox-x-containerized
     ```
 
 ## Saving persistent user data
@@ -67,7 +67,7 @@ a local directory to /var/dos/dosbox-x inside the container.
 ```shell
 $ docker run \
     -v /home/user1/savedata:/var/dos/dosbox-x \
-    godfollower/docker-dosbox-x-alpine
+    godfollower/dosbox-x-containerized
 ```
 
 Anything you or an application saves to the A drive should then be available on your
@@ -91,8 +91,8 @@ image mounts (for floppy or CD-ROM images) you need. See documentation on
 [MOUNT](https://www.dosbox.com/wiki/MOUNT)
 
 DOSBox-X will automatically load a `~/.dosbox-x/dosbox-x-{version}.conf` file or
-a `./dosbox-x.conf` file if found. In an attempt to be future-proof about DOSBox-X
-version, this image uses `./dosbox-x.conf`, but explicitly loads it with the
+a `./dosbox-x.conf` file if found. In an attempt to be maintainable with future DOSBox-X
+version(s), this image uses `./dosbox-x.conf`, but explicitly loads it with the
 `-conf` parameter.
 
 *NOTE* Remember to chown (or chmod) the file so that the dosbox-x user can read it!
@@ -108,7 +108,7 @@ myapplication.exe
 Example Dockerfile:
 
 ```dockerfile
-FROM godfollower/docker-dosbox-x
+FROM godfollower/dosbox-x
 
 # fetch application zip
 ADD --chown=dosbox-x:dosbox-x https://oldapplications.net/oldapplication.zip oldapplication.zip
@@ -117,7 +117,7 @@ RUN unzip myapplication.zip
 
 COPY --chown=dosbox-x:dosbox-x dosbox-x_oldapplication.conf dosbox-x_oldapplication.conf
 
-CMD ["-conf", "dosbox-x_oldapplicaiton.conf"]
+CMD ["-conf", "dosbox-x_oldapplication.conf"]
 ```
 
 ## Disclaimer
