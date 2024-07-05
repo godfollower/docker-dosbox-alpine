@@ -70,7 +70,7 @@ $ docker run \
     godfollower/docker-dosbox-x-alpine
 ```
 
-Anything you or the game saves to the A drive should then be available on your
+Anything you or an application saves to the A drive should then be available on your
 local machine, and you should be able to load data from the same location on future
 runs of the container.
 
