@@ -35,7 +35,7 @@ RUN mkdir -p /var/dos/dosbox-x
 RUN chown dosbox-x:dosbox-x /var/dos/dosbox-x
 
 # set any required runtime environment variables
-ENV XDG_RUNTIME_DIR=/run/user/$UID
+ENV XDG_RUNTIME_DIR=/home/dosbox-x/temp-files
 ENV HOSTNAME=dosbox-x-container
 
 # set the container's user
